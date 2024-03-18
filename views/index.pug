@@ -1,0 +1,88 @@
+extends layout
+
+block content
+  h1= 'COMPARADOR'
+  button(onclick="launchWebSocket('keyrock')") Actualizar KeyRock
+  button(onclick="launchWebSocket('binance')") Actualizar Binance
+  button(onclick="launchWebSocket('kraken')") Actualizar Kraken
+  table#dataTable
+    thead
+      tr
+          th Trx Count
+          th(colspan="3", id='keyrocks')
+          th(colspan="3", id='binance') 
+          th(colspan="3", id='kraken') 
+          th(colspan="2") fees(0.1)
+          th(colspan="2") fees(0.2)
+      tr
+        th(rowspan=2) PairCoin
+        th(colspan="3") KEYROCK
+        th(colspan="3") BINANCE
+        th(colspan="3") KRAKEN
+        th(colspan="2") KEYROCK/BINANCE
+        th(colspan="2") KEYROCK/KRAKEN
+      tr
+        th BIDS
+        th OFFERS
+        th SPREAD
+        th BIDS
+        th OFFERS
+        th SPREAD
+        th BIDS
+        th OFFERS
+        th SPREAD
+        th BIDS
+        th OFFERS
+        th BIDS
+        th OFFERS
+    tbody
+      each item in list_coins
+        tr
+          td=item
+          td(id=`bids_keyrocks_BTC-USDT`) 0
+          td(id=`offers_keyrocks_BTC-USDT`) 0
+          td(id=`spread_keyrocks_BTC-USDT`) 0
+          td(id=`bids_binance_BTC-USDT`) 0
+          td(id=`offers_binance_BTC-USDT`) 0
+          td(id=`spread_binance_BTC-USDT`) 0
+          td(id=`bids_kraken_BTC-USDT`) 0
+          td(id=`offers_kraken_BTC-USDT`) 0
+          td(id=`spread_kraken_BTC-USDT`) 0
+
+          td(id=`bids_keyrocks_binance_BTC-USDT`) 0
+          td(id=`offers_keyrocks_binance_BTC-USDT`) 0
+          td(id=`bids_keyrocks_kraken_BTC-USDT`) 0
+          td(id=`offers_keyrocks_kraken_BTC-USDT`) 0
+      tr
+        td BTC-EUR
+        td(id='bids_keyrocks_BTC-EUR') 0
+        td(id='offers_keyrocks_BTC-EUR') 0
+        td(id='spread_keyrocks_BTC-EUR') 0
+        td(id='bids_binance_BTC-EUR') 0
+        td(id='offers_binance_BTC-EUR') 0
+        td(id='spread_binance_BTC-EUR') 0
+        td(id='bids_kraken_BTC-EUR') 0
+        td(id='offers_kraken_BTC-EUR') 0
+        td(id='spread_kraken_BTC-EUR') 0
+
+        td(id='bids_keyrocks_binance_BTC-EUR') 0
+        td(id='offers_keyrocks_binance_BTC-EUR') 0
+        td(id='bids_keyrocks_kraken_BTC-EUR') 0
+        td(id='offers_keyrocks_kraken_BTC-EUR') 0
+      tr
+        td USDT-EUR
+        td(id='bids_keyrocks_USDT-EUR') 0
+        td(id='offers_keyrocks_USDT-EUR') 0
+        td(id='spread_keyrocks_USDT-EUR') 0
+        td(id='bids_binance_USDT-EUR') 0
+        td(id='offers_binance_USDT-EUR') 0
+        td(id='spread_binance_USDT-EUR') 0
+        td(id='bids_kraken_USDT-EUR') 0
+        td(id='offers_kraken_USDT-EUR') 0
+        td(id='spread_kraken_USDT-EUR') 0
+
+        td(id='bids_keyrocks_binance_USDT-EUR') 0
+        td(id='offers_keyrocks_binance_USDT-EUR') 0
+        td(id='bids_keyrocks_kraken_USDT-EUR') 0
+        td(id='offers_keyrocks_kraken_USDT-EUR') 0
+
