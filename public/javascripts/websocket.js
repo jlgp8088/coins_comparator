@@ -10,7 +10,7 @@ const calcRelation = (price1, price2, fee) => {
 const calcSpread = (cell_bids, cell_offer) => {
   const bid = parseFloat(cell_bids.innerHTML);
   const offer = parseFloat(cell_offer.innerHTML);
-  const spread = ((bid - offer) / bid) * 100;
+  const spread = bid !== 0 && offer !== 0 ? ((bid - offer) / bid) * 100 : 0;
   return spread.toFixed(3);
 };
 
