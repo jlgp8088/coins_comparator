@@ -39,50 +39,18 @@ block content
       each item in list_coins
         tr
           td=item
-          td(id=`bids_keyrocks_BTC-USDT`) 0
-          td(id=`offers_keyrocks_BTC-USDT`) 0
-          td(id=`spread_keyrocks_BTC-USDT`) 0
-          td(id=`bids_binance_BTC-USDT`) 0
-          td(id=`offers_binance_BTC-USDT`) 0
-          td(id=`spread_binance_BTC-USDT`) 0
-          td(id=`bids_kraken_BTC-USDT`) 0
-          td(id=`offers_kraken_BTC-USDT`) 0
-          td(id=`spread_kraken_BTC-USDT`) 0
+          td(id=`bids_keyrocks_${item}`) 0
+          td(id=`offers_keyrocks_${item}`) 0
+          td(id=`spread_keyrocks_${item}`) 0
+          td(id=`bids_binance_${item}`) 0
+          td(id=`offers_binance_${item}`) 0
+          td(id=`spread_binance_${item}`) 0
+          td(id=`bids_kraken_${item}`) 0
+          td(id=`offers_kraken_${item}`) 0
+          td(id=`spread_kraken_${item}`) 0
 
-          td(id=`bids_keyrocks_binance_BTC-USDT`) 0
-          td(id=`offers_keyrocks_binance_BTC-USDT`) 0
-          td(id=`bids_keyrocks_kraken_BTC-USDT`) 0
-          td(id=`offers_keyrocks_kraken_BTC-USDT`) 0
-      tr
-        td BTC-EUR
-        td(id='bids_keyrocks_BTC-EUR') 0
-        td(id='offers_keyrocks_BTC-EUR') 0
-        td(id='spread_keyrocks_BTC-EUR') 0
-        td(id='bids_binance_BTC-EUR') 0
-        td(id='offers_binance_BTC-EUR') 0
-        td(id='spread_binance_BTC-EUR') 0
-        td(id='bids_kraken_BTC-EUR') 0
-        td(id='offers_kraken_BTC-EUR') 0
-        td(id='spread_kraken_BTC-EUR') 0
-
-        td(id='bids_keyrocks_binance_BTC-EUR') 0
-        td(id='offers_keyrocks_binance_BTC-EUR') 0
-        td(id='bids_keyrocks_kraken_BTC-EUR') 0
-        td(id='offers_keyrocks_kraken_BTC-EUR') 0
-      tr
-        td USDT-EUR
-        td(id='bids_keyrocks_USDT-EUR') 0
-        td(id='offers_keyrocks_USDT-EUR') 0
-        td(id='spread_keyrocks_USDT-EUR') 0
-        td(id='bids_binance_USDT-EUR') 0
-        td(id='offers_binance_USDT-EUR') 0
-        td(id='spread_binance_USDT-EUR') 0
-        td(id='bids_kraken_USDT-EUR') 0
-        td(id='offers_kraken_USDT-EUR') 0
-        td(id='spread_kraken_USDT-EUR') 0
-
-        td(id='bids_keyrocks_binance_USDT-EUR') 0
-        td(id='offers_keyrocks_binance_USDT-EUR') 0
-        td(id='bids_keyrocks_kraken_USDT-EUR') 0
-        td(id='offers_keyrocks_kraken_USDT-EUR') 0
+          td(id=`bids_keyrocks_binance_${item}`) 0
+          td(id=`offers_keyrocks_binance_${item}`) 0
+          td(id=`bids_keyrocks_kraken_${item}`) 0
+          td(id=`offers_keyrocks_kraken_${item}`) 0
 
