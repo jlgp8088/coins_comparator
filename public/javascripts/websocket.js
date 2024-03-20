@@ -18,7 +18,10 @@ const dynamicRelationCalc = (base, compare) => {
   const total = price1_num !== 0 && price2_num !== 0 ? (price2_num / price1_num - 1) * 100 : 0;
   if (cell_result) cell_result.innerHTML = total.toFixed(3);
 };
-
+//spread_bids_kraken_BTC-USDT_offers_binance_BTC-USDT
+//spread_bids_keyrocks_BTC-USDT_offers_binance_BTC-USDT
+//spread_bids_keyrocks_BTC-EUR_offers_binance_BTC-EUR
+//spread_bids_kraken_BTC-EUR_offers_binance_BTC-EUR
 const dynamicSpreadCalc = (base, compare) => {
   const cell_base = document.getElementById(base);
   const cell_compare = document.getElementById(compare);
@@ -35,8 +38,6 @@ const dynamicSpreadCalc = (base, compare) => {
 const updateTable = (data) => {
   const conuntKeyRock = document.getElementById(data.origin);
   conuntKeyRock.innerHTML = `Trx Count ${data.seqNum}`;
-  const keyRockPriceBids = document.getElementById(`bids_keyrocks_${data.pair}`);
-  const keyRockPriceOffer = document.getElementById(`offers_keyrocks_${data.pair}`);
 
   const cell_bids_name = `bids_${data.origin}_${data.pair}`;
   const cell_offer_name = `offers_${data.origin}_${data.pair}`;
@@ -48,9 +49,17 @@ const updateTable = (data) => {
   if (data.bids) assingValue(cell_bids_name, data.bids, fee);
   if (data.offers) assingValue(cell_offer_name, data.offers, fee);
   if (data.bids || data.offers) {
+    // tabla comparativa principal
     dynamicRelationCalc(`bids_keyrocks_${data.pair}`, cell_bids_name);
     dynamicRelationCalc(`offers_keyrocks_${data.pair}`, cell_offer_name);
     dynamicSpreadCalc(cell_bids_name, cell_offer_name);
+
+    //spred comparativos especificos
+    dynamicSpreadCalc(`bids_keyrocks_${data.pair}`, `offers_binance_${data.pair}`);
+    dynamicSpreadCalc(`offers_keyrocks_${data.pair}`, `bids_binance_${data.pair}`);
+
+    dynamicSpreadCalc(`bids_keyrocks_${data.pair}`, `offers_kraken_${data.pair}`);
+    dynamicSpreadCalc(`offers_keyrocks_${data.pair}`, `bids_kraken_${data.pair}`);
   }
 };
 
@@ -69,7 +78,7 @@ function initWebSocket() {
       const data = JSON.parse(response.data);
       updateTable(data);
     } catch (error) {
-      console.log('response fail', error.message, response.data);
+      //console.log('response fail', error.message, response.data);
     }
   };
 }

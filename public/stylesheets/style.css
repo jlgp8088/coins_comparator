@@ -10,6 +10,8 @@ a {
 table {
   border-collapse: collapse;
   width: 100%;
+  border: 2px solid black;
+  margin: 2px;
 }
 
 th, td {
@@ -34,4 +36,8 @@ button {
   margin: 4px 2px; 
   cursor: pointer; 
   border-radius: 10px; 
+}
+
+.table-container {
+  display: flex; /* Mostrar los elementos en línea */
 }

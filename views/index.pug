@@ -53,3 +53,84 @@ block content
           td(id=`rel_offers_keyrocks_${item}_offers_binance_${item}`) 0
           td(id=`rel_bids_keyrocks_${item}_bids_kraken_${item}`) 0
           td(id=`rel_offers_keyrocks_${item}_offers_kraken_${item}`) 0
+
+  h1= 'COMPARADOR KEYROCK / BINANCE'
+
+  .table-container
+    table#dataTable
+      thead
+        tr
+          th(rowspan=2) PairCoin
+          th(colspan="3") KEYROCK BID / BINANCE OFFERS
+        tr
+          th BIDS
+          th OFFERS
+          th SPREAD
+
+      tbody
+        each item in list_coins
+          tr
+            td=item
+            td(id=`bids_keyrocks_${item}`) 0
+            td(id=`offers_binance_${item}`) 0
+            td(id=`spread_bids_keyrocks_${item}_offers_binance_${item}`) 0
+            
+    table#dataTable
+      thead
+        tr
+          th(rowspan=2) PairCoin
+          th(colspan="3") KEYROCK OFFERS / BINANCE BID
+        tr
+          th OFFERS
+          th BIDS
+          th SPREAD
+
+      tbody
+        each item in list_coins
+          tr
+            td=item
+            td(id=`offers_keyrocks_${item}`) 0
+            td(id=`bids_binance_${item}`) 0
+            td(id=`spread_offers_keyrocks_${item}_bids_binance_${item}`) 0
+
+
+
+  h1= 'COMPARADOR KEYROCK / KRAKEN'
+
+  .table-container
+    table#dataTable
+      thead
+        tr
+          th(rowspan=2) PairCoin
+          th(colspan="3") KEYROCK BID / KRAKEN OFFERS
+        tr
+          th BIDS
+          th OFFERS
+          th SPREAD
+
+      tbody
+        each item in list_coins
+          tr
+            td=item
+            td(id=`bids_keyrocks_${item}`) 0
+            td(id=`offers_kraken_${item}`) 0
+            td(id=`spread_bids_keyrocks_${item}_offers_kraken_${item}`) 0
+            
+    table#dataTable
+      thead
+        tr
+          th(rowspan=2) PairCoin
+          th(colspan="3") KEYROCK OFFERS / KRAKEN BID
+        tr
+          th OFFERS
+          th BIDS
+          th SPREAD
+
+      tbody
+        each item in list_coins
+          tr
+            td=item
+            td(id=`offers_keyrocks_${item}`) 0
+            td(id=`bids_kraken_${item}`) 0
+            td(id=`spread_offers_keyrocks_${item}_bids_kraken_${item}`) 0
+
