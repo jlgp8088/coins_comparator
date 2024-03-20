@@ -41,16 +41,15 @@ block content
           td=item
           td(id=`bids_keyrocks_${item}`) 0
           td(id=`offers_keyrocks_${item}`) 0
-          td(id=`spread_keyrocks_${item}`) 0
+          td(id=`spread_bids_keyrocks_${item}_offers_keyrocks_${item}`) 0
           td(id=`bids_binance_${item}`) 0
           td(id=`offers_binance_${item}`) 0
-          td(id=`spread_binance_${item}`) 0
+          td(id=`spread_bids_binance_${item}_offers_binance_${item}`) 0
           td(id=`bids_kraken_${item}`) 0
           td(id=`offers_kraken_${item}`) 0
-          td(id=`spread_kraken_${item}`) 0
+          td(id=`spread_bids_kraken_${item}_offers_kraken_${item}`) 0
 
-          td(id=`bids_keyrocks_binance_${item}`) 0
-          td(id=`offers_keyrocks_binance_${item}`) 0
-          td(id=`bids_keyrocks_kraken_${item}`) 0
-          td(id=`offers_keyrocks_kraken_${item}`) 0
-
+          td(id=`rel_bids_keyrocks_${item}_bids_binance_${item}`) 0
+          td(id=`rel_offers_keyrocks_${item}_offers_binance_${item}`) 0
+          td(id=`rel_bids_keyrocks_${item}_bids_kraken_${item}`) 0
+          td(id=`rel_offers_keyrocks_${item}_offers_kraken_${item}`) 0

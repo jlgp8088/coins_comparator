@@ -1,17 +1,35 @@
 // websocket.js
-const calcRelation = (price1, price2, fee) => {
-  const price1_num = parseFloat(price1.innerHTML || 0);
-  const price2_num = parseFloat(price2.innerHTML || 0) * (1 + fee / 100);
-  const total = price1_num !== 0 && price2_num !== 0 ? (price2_num / price1_num - 1) * 100 : 0;
-
-  return total.toFixed(3);
+const assingValue = (id, value, fee) => {
+  const elements = document.querySelectorAll(`#${id}`);
+  // console.log(elements);
+  // Iterar sobre la lista de elementos y actualizar su contenido
+  const total = parseFloat(value) * (1 + fee / 100);
+  elements.forEach((element) => {
+    element.innerHTML = total.toFixed(8);
+  });
 };
 
-const calcSpread = (cell_bids, cell_offer) => {
-  const bid = parseFloat(cell_bids.innerHTML);
-  const offer = parseFloat(cell_offer.innerHTML);
-  const spread = bid !== 0 && offer !== 0 ? ((bid - offer) / bid) * 100 : 0;
-  return spread.toFixed(3);
+const dynamicRelationCalc = (base, compare) => {
+  const cell_base = document.getElementById(base);
+  const cell_compare = document.getElementById(compare);
+  const cell_result = document.getElementById(`rel_${base}_${compare}`);
+  const price1_num = parseFloat(cell_base.innerHTML || 0);
+  const price2_num = parseFloat(cell_compare.innerHTML || 0);
+  const total = price1_num !== 0 && price2_num !== 0 ? (price2_num / price1_num - 1) * 100 : 0;
+  if (cell_result) cell_result.innerHTML = total.toFixed(3);
+};
+
+const dynamicSpreadCalc = (base, compare) => {
+  const cell_base = document.getElementById(base);
+  const cell_compare = document.getElementById(compare);
+  const cell_result = document.getElementById(`spread_${base}_${compare}`);
+  const base_value = parseFloat(cell_base.innerHTML || 0);
+  const compare_value = parseFloat(cell_compare.innerHTML || 0);
+  const spread =
+    base_value !== 0 && compare_value !== 0
+      ? ((compare_value - base_value) / compare_value) * 100
+      : 0;
+  cell_result.innerHTML = spread.toFixed(3);
 };
 
 const updateTable = (data) => {
@@ -22,26 +40,18 @@ const updateTable = (data) => {
 
   const cell_bids_name = `bids_${data.origin}_${data.pair}`;
   const cell_offer_name = `offers_${data.origin}_${data.pair}`;
-  const cell_spread_name = `spread_${data.origin}_${data.pair}`;
-  const compare_bind = `bids_keyrocks_${data.origin}_${data.pair}`;
-  const compare_offer = `offers_keyrocks_${data.origin}_${data.pair}`;
-  const cell_bids = document.getElementById(cell_bids_name);
-  const cell_offer = document.getElementById(cell_offer_name);
-  const cell_spread = document.getElementById(cell_spread_name);
-  const cell_compare_bind = document.getElementById(compare_bind);
-  const cell_compare_offer = document.getElementById(compare_offer);
 
   let fee = 0;
   if (data.origin === 'binance') fee = 0.08;
   if (data.origin === 'kraken') fee = 0.08;
 
-  if (data.bids) cell_bids.innerHTML = `<td>${data.bids}</td>`;
-  if (data.offers) cell_offer.innerHTML = `<td>${data.offers}</td>`;
-  if (cell_spread) cell_spread.innerHTML = calcSpread(cell_bids, cell_offer);
-  if (cell_compare_bind)
-    cell_compare_bind.innerHTML = calcRelation(keyRockPriceBids, cell_bids, fee);
-  if (cell_compare_offer)
-    cell_compare_offer.innerHTML = calcRelation(keyRockPriceOffer, cell_offer, fee);
+  if (data.bids) assingValue(cell_bids_name, data.bids, fee);
+  if (data.offers) assingValue(cell_offer_name, data.offers, fee);
+  if (data.bids || data.offers) {
+    dynamicRelationCalc(`bids_keyrocks_${data.pair}`, cell_bids_name);
+    dynamicRelationCalc(`offers_keyrocks_${data.pair}`, cell_offer_name);
+    dynamicSpreadCalc(cell_bids_name, cell_offer_name);
+  }
 };
 
 function launchWebSocket(path) {
