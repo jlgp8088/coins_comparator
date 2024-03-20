@@ -1,10 +1,11 @@
 extends layout
 
 block content
+  .button-container
+    button(onclick="launchWebSocket('keyrock')") Actualizar KeyRock
+    button(onclick="launchWebSocket('binance')") Actualizar Binance
+    button(onclick="launchWebSocket('kraken')") Actualizar Kraken
   h1= 'COMPARADOR'
-  button(onclick="launchWebSocket('keyrock')") Actualizar KeyRock
-  button(onclick="launchWebSocket('binance')") Actualizar Binance
-  button(onclick="launchWebSocket('kraken')") Actualizar Kraken
   table#dataTable
     thead
       tr
