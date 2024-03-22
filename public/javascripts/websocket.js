@@ -32,6 +32,11 @@ const dynamicSpreadCalc = (base, compare) => {
     base_value !== 0 && compare_value !== 0
       ? ((compare_value - base_value) / compare_value) * 100
       : 0;
+  if (spread > 0.2) {
+    cell_result.classList.add('green');
+  } else {
+    cell_result.classList.remove('green');
+  }
   cell_result.innerHTML = spread.toFixed(3);
 };
 

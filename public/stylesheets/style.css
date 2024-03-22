@@ -50,3 +50,7 @@ button {
 h1 {
   color: #5d5d5d;
 }
+
+.green {
+  background-color: green !important; /* !important para asegurar que sobrescriba otras reglas */
+}
