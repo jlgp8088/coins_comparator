@@ -60,6 +60,9 @@ const updateTable = (data) => {
 
     dynamicSpreadCalc(`bids_keyrocks_${data.pair}`, `offers_kraken_${data.pair}`);
     dynamicSpreadCalc(`offers_keyrocks_${data.pair}`, `bids_kraken_${data.pair}`);
+
+    dynamicSpreadCalc(`bids_binance_${data.pair}`, `offers_kraken_${data.pair}`);
+    dynamicSpreadCalc(`offers_binance_${data.pair}`, `bids_kraken_${data.pair}`);
   }
 };
 
