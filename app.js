@@ -9,7 +9,7 @@ const {
   setServerBinanceWebSocket
 } = require('./routes/apiRoutes');
 const index = require('./routes/index');
-const suscription = require('./routes/suscription');
+// const suscription = require('./routes/suscription');
 
 const app = express();
 const server = http.createServer(app);
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Middleware para manejar rutas
 app.use('/', index);
 app.use('/api', apiRoutes);
-app.use('/suscription', suscription);
+// app.use('/suscription', suscription);
 
 // WebSocket connection handling
 wss.on('connection', (ws) => {
