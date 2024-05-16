@@ -6,7 +6,10 @@ const {
   router: apiRoutes,
   setServerKeyRocksWebSocket,
   setServerKrakenWebSocket,
-  setServerBinanceWebSocket
+  setServerBinanceWebSocket,
+  launchKeyRock,
+  launchKraken,
+  launchBinance
 } = require('./routes/apiRoutes');
 const index = require('./routes/index');
 // const suscription = require('./routes/suscription');
@@ -26,6 +29,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/api', apiRoutes);
 // app.use('/suscription', suscription);
+
+launchKeyRock();
+launchKraken();
+launchBinance();
 
 // WebSocket connection handling
 wss.on('connection', (ws) => {
