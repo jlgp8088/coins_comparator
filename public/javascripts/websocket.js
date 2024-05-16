@@ -79,7 +79,7 @@ function launchWebSocket(path) {
 }
 
 function initWebSocket() {
-  const ws = new WebSocket('ws://localhost:3000');
+  const ws = new WebSocket('ws://depacomp.onrender.com');
 
   ws.onmessage = (response) => {
     try {
