@@ -18,9 +18,9 @@ let serverBinanceWebSocket;
 var globalIsWebSocketOpen = false;
 // Endpoint para manejar la solicitud de datos
 router.get('/keyrock', (req, res) => {
-  const api_key = 'KEYFSB7WV4CQ';
-  const api_secret = 'ljv7d5klkp51cqcmgrsse8or94e5yltn';
-  const host = 'test-otc.keyrock.com'; // Por determinar, por ejemplo
+  const api_key = process.env.KEYROCK_API_KEY;
+  const api_secret = process.env.KEYROCK_API_SECRET;
+  const host = process.env.KEYROCK_HOST; // Por determinar, por ejemplo
   const path = '/ws/v1';
   const utc_now = new Date().toISOString();
   const utcDateTime = utc_now.slice(0, -5) + '.000000Z';
@@ -36,7 +36,7 @@ router.get('/keyrock', (req, res) => {
   }
 
   // console.log('signature', signature)
-
+  console.log(`wss://${host}${path}`);
   const externalDataProviderCrypto = new WebSocket(`wss://${host}${path}`, {
     headers: {
       ApiKey: api_key,
@@ -46,7 +46,7 @@ router.get('/keyrock', (req, res) => {
   });
 
   externalDataProviderCrypto.on('open', () => {
-    console.log('Conexión establecida con el proveedor externo.');
+    console.log('Conexión establecida con el proveedor keyrock.');
 
     // Enviar solicitud de datos al proveedor externo
 
@@ -68,21 +68,21 @@ router.get('/keyrock', (req, res) => {
   });
 
   externalDataProviderCrypto.on('close', () => {
-    console.log('Conexión cerrada con el proveedor externo.');
+    console.log('Conexión cerrada con el proveedor keyrock.');
   });
 
-  res.send('Keyrocks online');
+  res.send({ msg: 'Keyrocks online' });
 });
 
 router.get('/kraken', (req, res) => {
-  var websocketurl = 'wss://ws.kraken.com/';
+  var websocketurl = process.env.KRAKEN_HOST;
 
   //Create the WebSocket object (web socket echo test service provided by websocket.org)
   socket = new WebSocket(websocketurl);
 
   //This function is called when the websocket connection is opened
   socket.onopen = function () {
-    console.log('Connected! :)');
+    console.log('Conexión establecida con el proveedor Kraken.');
     globalIsWebSocketOpen = true;
     globalCountKraken = 0;
     if (globalIsWebSocketOpen) {
@@ -113,12 +113,12 @@ router.get('/kraken', (req, res) => {
       serverKrakenWebSocket.send(dataStructure);
     }
   };
-  res.send('kraken online');
+  res.send({ msg: 'kraken online' });
 });
 
 router.get('/binance', (req, res) => {
   let globalCountBinance = 0;
-
+  console.log('Conexión establecida con el proveedor binance.');
   binance.websockets.depth(['BTCUSDT', 'BTCEUR', 'EURUSDT'], (depth) => {
     // let { e: eventType, E: eventTime, s: symbol, u: updateId, b: bidDepth, a: askDepth } = depth;
     // console.info(symbol + ' market depth update');
@@ -129,7 +129,7 @@ router.get('/binance', (req, res) => {
       serverBinanceWebSocket.send(data);
     }
   });
-  res.send('Binance corriendo');
+  res.send({ msg: 'Binance online' });
 });
 
 // Función para establecer la conexión WebSocket del servidor
