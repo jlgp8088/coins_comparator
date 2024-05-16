@@ -17,7 +17,7 @@ let serverKrakenWebSocket;
 let serverBinanceWebSocket;
 var globalIsWebSocketOpen = false;
 // Endpoint para manejar la solicitud de datos
-router.get('/keyrock', (req, res) => {
+const launchKeyRock = () => {
   const api_key = process.env.KEYROCK_API_KEY;
   const api_secret = process.env.KEYROCK_API_SECRET;
   const host = process.env.KEYROCK_HOST; // Por determinar, por ejemplo
@@ -71,10 +71,11 @@ router.get('/keyrock', (req, res) => {
     console.log('Conexión cerrada con el proveedor keyrock.');
   });
 
-  res.send({ msg: 'Keyrocks online' });
-});
+  console.log({ msg: 'Keyrocks online' });
+};
 
-router.get('/kraken', (req, res) => {
+// router.get('/kraken', (req, res) => {
+const launchKraken = () => {
   var websocketurl = process.env.KRAKEN_HOST;
 
   //Create the WebSocket object (web socket echo test service provided by websocket.org)
@@ -113,10 +114,11 @@ router.get('/kraken', (req, res) => {
       serverKrakenWebSocket.send(dataStructure);
     }
   };
-  res.send({ msg: 'kraken online' });
-});
+  console.log({ msg: 'kraken online' });
+};
 
-router.get('/binance', (req, res) => {
+// router.get('/binance', (req, res) => {
+const launchBinance = () => {
   let globalCountBinance = 0;
   console.log('Conexión establecida con el proveedor binance.');
   binance.websockets.depth(['BTCUSDT', 'BTCEUR', 'EURUSDT'], (depth) => {
@@ -129,8 +131,8 @@ router.get('/binance', (req, res) => {
       serverBinanceWebSocket.send(data);
     }
   });
-  res.send({ msg: 'Binance online' });
-});
+  console.log({ msg: 'Binance online' });
+};
 
 // Función para establecer la conexión WebSocket del servidor
 function setServerKeyRocksWebSocket(ws) {
@@ -149,5 +151,8 @@ module.exports = {
   router,
   setServerKeyRocksWebSocket,
   setServerKrakenWebSocket,
-  setServerBinanceWebSocket
+  setServerBinanceWebSocket,
+  launchKeyRock,
+  launchKraken,
+  launchBinance
 };
