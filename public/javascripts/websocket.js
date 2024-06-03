@@ -106,7 +106,7 @@ function createTable(data) {
       </thead>
     `;
     
-    for (var i = 0;i < data.size.bids.length; i++) {
+    for (var i = 0;i < data.size.bids.length && i < 4; i++) {
       var row = `<tr>
                   <td>${data.pair}</td>
                   <td>${Number(data.size.bids[i].Size).toFixed(2)}</td>
