@@ -85,8 +85,35 @@ function initWebSocket(web_socket_url) {
     try {
       const data = JSON.parse(response.data);
       updateTable(data);
+      createTable(data)
     } catch (error) {
       //console.log('response fail', error.message, response.data);
     }
   };
+}
+
+function createTable(data) {
+  if (data && data.size) {
+    var table = document.getElementById(`dynamicTable_${data.origin}_${data.pair}`);
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>KEYROCK</th>
+          <th>SIZE</th>
+          <th>OFFERS</th>
+          <th>BIDS</th>
+        <tr>
+      </thead>
+    `;
+    
+    for (var i = 0;i < data.size.bids.length; i++) {
+      var row = `<tr>
+                  <td>${data.pair}</td>
+                  <td>${Number(data.size.bids[i].Size).toFixed(2)}</td>
+                  <td>${data.size.offers[i].Price}</td>
+                  <td>${data.size.bids[i].Price}</td>
+                </tr>`
+      table.innerHTML += row;
+    }
+  }
 }
