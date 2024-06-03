@@ -78,8 +78,8 @@ function launchWebSocket(path) {
   fetch(`/api/${path}`, options).then((res) => console.log(res));
 }
 
-function initWebSocket() {
-  const ws = new WebSocket('wss://depacomp.onrender.com');
+function initWebSocket(web_socket_url) {
+  const ws = new WebSocket(web_socket_url);
 
   ws.onmessage = (response) => {
     try {
