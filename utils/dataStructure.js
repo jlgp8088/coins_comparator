@@ -36,7 +36,11 @@ const keyRocksStructure = (data) => {
         pair: keyrock[info[0].Symbol],
         bids: info[0].Bids[0].Price,
         offers: info[0].Offers[0].Price,
-        seqNum: jsonObject.seqNum
+        seqNum: jsonObject.seqNum,
+        size: {
+          bids: info[0].Bids,
+          offers: info[0].Offers
+        }
       };
       return JSON.stringify(dataStructure);
     }

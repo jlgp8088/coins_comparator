@@ -78,15 +78,42 @@ function launchWebSocket(path) {
   fetch(`/api/${path}`, options).then((res) => console.log(res));
 }
 
-function initWebSocket() {
-  const ws = new WebSocket('wss://depacomp.onrender.com');
+function initWebSocket(web_socket_url) {
+  const ws = new WebSocket(web_socket_url);
 
   ws.onmessage = (response) => {
     try {
       const data = JSON.parse(response.data);
       updateTable(data);
+      createTable(data)
     } catch (error) {
       //console.log('response fail', error.message, response.data);
     }
   };
+}
+
+function createTable(data) {
+  if (data && data.size) {
+    var table = document.getElementById(`dynamicTable_${data.origin}_${data.pair}`);
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>KEYROCK</th>
+          <th>SIZE</th>
+          <th>OFFERS</th>
+          <th>BIDS</th>
+        <tr>
+      </thead>
+    `;
+    
+    for (var i = 0;i < data.size.bids.length && i < 4; i++) {
+      var row = `<tr>
+                  <td>${data.pair}</td>
+                  <td>${Number(data.size.bids[i].Size).toFixed(2)}</td>
+                  <td>${data.size.offers[i].Price}</td>
+                  <td>${data.size.bids[i].Price}</td>
+                </tr>`
+      table.innerHTML += row;
+    }
+  }
 }

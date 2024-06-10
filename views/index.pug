@@ -177,3 +177,8 @@ block content
             td(id=`bids_kraken_${item}`) 0
             td(id=`spread_offers_binance_${item}_bids_kraken_${item}`) 0
 
+  h1= 'COMPARADOR PROFUNDIDAD'
+
+  .table-container
+    each item in list_coins   
+      table(id=`dynamicTable_keyrocks_${item}`)
