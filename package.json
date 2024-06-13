@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec node ./app"
+    "start": "nodemon --exec node ./app",
+    "prod" : "node ./app.js"
   },
   "dependencies": {
     "base64url": "^3.0.1",
