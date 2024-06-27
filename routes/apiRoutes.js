@@ -87,8 +87,8 @@ const launchKraken = () => {
     globalIsWebSocketOpen = true;
     globalCountKraken = 0;
     if (globalIsWebSocketOpen) {
-      var message =
-        '{"event":"subscribe", "subscription":{"name":"trade"}, "pair":["BTC/USDT", "BTC/EUR", "USDT/EUR"]}';
+      var message ='{"method": "subscribe","params": {"channel": "trade","symbol": ["BTC/USDT", "BTC/EUR", "USDT/EUR"],"snapshot": true}}'
+        // '{"event":"subscribe", "subscription":{"name":"trade"}, "pair":["BTC/USDT", "BTC/EUR", "USDT/EUR"]}';
 
       if (message !== '') {
         socket.send(message);
@@ -111,7 +111,10 @@ const launchKraken = () => {
     globalCountKraken++;
     dataStructure = krakenStructure(message.data, globalCountKraken);
     if (serverKrakenWebSocket && dataStructure) {
-      serverKrakenWebSocket.send(dataStructure);
+      dataStructure.forEach(element => {
+        serverKrakenWebSocket.send(JSON.stringify(element));
+      });
+      
     }
   };
   console.log({ msg: 'kraken online' });

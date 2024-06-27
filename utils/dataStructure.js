@@ -4,19 +4,21 @@ const krakenStructure = (message, seqNum) => {
   try {
     const response = message.toString('utf-8');
     const data = JSON.parse(response);
-    if (data[1] !== undefined) {
-      if (data[1][0] !== undefined) {
-        const bids = data[1][0][3] === 'b' ? data[1][0][0] : null;
-        const offers = data[1][0][3] === 's' ? data[1][0][0] : null;
-        dataStructure = {
+    if (data && data.data) {
+      const wsdata = data.data
+      const dataStructure =  wsdata.map((element)=>{
+        const bids = element.side === 'buy' ? element.price : null;
+        const offers = element.side === 'sell' ? element.price : null;
+        return {
           origin: 'kraken',
-          pair: kraken[data[3]],
+          pair: kraken[element.symbol],
           bids, //b
           offers, //s
           seqNum
         };
-        return JSON.stringify(dataStructure);
-      }
+      })
+
+      return dataStructure;
     }
     return null;
   } catch (error) {
