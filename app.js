@@ -34,8 +34,20 @@ launchKeyRock();
 launchKraken();
 launchBinance();
 
+const authenticate = (req, ws) => {
+  // const apiKey = req.headers['api-key'];
+  const apiKey = req.headers['sec-websocket-protocol'];
+  if (apiKey !== process.env.API_KEY) {
+    ws.close(1008, 'Invalid API Key');
+    console.log('Conexión rechazada debido a una API Key inválida.');
+    return false;
+  }
+  return true;
+};
+
 // WebSocket connection handling
-wss.on('connection', (ws) => {
+wss.on('connection', (ws, req) => {
+  if (!authenticate(req, ws)) return;
   console.log('Cliente conectado al WebSocket.');
 
   // Establecer el WebSocket del servidor en el manejador de rutas

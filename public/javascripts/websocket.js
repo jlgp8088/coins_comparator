@@ -78,8 +78,8 @@ function launchWebSocket(path) {
   fetch(`/api/${path}`, options).then((res) => console.log(res));
 }
 
-function initWebSocket(web_socket_url) {
-  const ws = new WebSocket(web_socket_url);
+function initWebSocket(web_socket_url, api_key) {
+  const ws = new WebSocket(web_socket_url, [api_key]);
 
   ws.onmessage = (response) => {
     try {
